@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MoneyCheck</string>
+    <string name="MC_intro">Yuk cek kondisi keuanganmu Bulan ini!</string>
+    <string name="pemasukan">Pemasukan</string>
+    <string name="pengeluaran">Pengeluaran</string>
+    <string name="tabungan">Punya Tabungan</string>
+    <string name="jumlah_tabungan">Jumlah Tabungan</string>
+    <string name="hitung">Hitung</string>
 </resources>
