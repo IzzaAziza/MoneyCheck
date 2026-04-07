@@ -5,5 +5,18 @@
     <string name="pengeluaran">Pengeluaran</string>
     <string name="tabungan">Punya Tabungan</string>
     <string name="jumlah_tabungan">Jumlah Tabungan</string>
+
     <string name="hitung">Hitung</string>
+
+    <string name="hasil_sisa">Sisa: Rp%d</string>
+    <string name="hasil_tabungan">Tabungan: Rp%d</string>
+
+    <string name="status_aman">Keuangan sangat stabil! Kamu bisa mengelola pengeluaran dan menabung dengan baik.</string>
+    <string name="status_cukup">Keuangan cukup stabil, tapi masih bisa lebih hemat lagi!</string>
+    <string name="status_boros">Pengeluaranmu cukup tinggi, mulai perlu dikontrol!</string>
+    <string name="status_sangat_boros">Pengeluaran melebihi pemasukan! Waspada, kondisi keuangan tidak sehat</string>
+
+    <string name="input_invalid">Tidak boleh kosong.</string>
+    <string name="tabungan_kosong">Tidak ada pemasukan</string>
+    <string name="reset">Reset</string>
 </resources>
