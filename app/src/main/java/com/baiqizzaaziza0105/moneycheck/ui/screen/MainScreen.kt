@@ -1,6 +1,7 @@
 package com.baiqizzaaziza0105.moneycheck.ui.screen
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,10 +19,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -31,7 +34,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,12 +46,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.baiqizzaaziza0105.moneycheck.R
+import com.baiqizzaaziza0105.moneycheck.navigation.Screen
 import com.baiqizzaaziza0105.moneycheck.ui.theme.MoneyCheckTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -58,7 +64,18 @@ fun MainScreen() {
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
-                )
+                ),
+                actions = {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.About.route)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.about_screen),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -68,16 +85,16 @@ fun MainScreen() {
 
 @Composable
 fun ScreenContent(modifier: Modifier = Modifier) {
-    var pemasukan by remember { mutableStateOf("") }
-    var pemasukanError by remember { mutableStateOf(false) }
+    var pemasukan by rememberSaveable { mutableStateOf("") }
+    var pemasukanError by rememberSaveable { mutableStateOf(false) }
 
-    var pengeluaran by remember { mutableStateOf("") }
-    var pengeluaranError by remember { mutableStateOf(false) }
+    var pengeluaran by rememberSaveable { mutableStateOf("") }
+    var pengeluaranError by rememberSaveable { mutableStateOf(false) }
 
-    var punyaTabungan by remember { mutableStateOf(false) }
-    var jumlahTabungan by remember { mutableStateOf("") }
+    var punyaTabungan by rememberSaveable { mutableStateOf(false) }
+    var jumlahTabungan by rememberSaveable { mutableStateOf("") }
 
-    var hasil by remember { mutableStateOf("") }
+    var hasil by rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current
 
     Column(
@@ -168,8 +185,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                     } else {
                         "Tidak ada pemasukan"
                     }
-
-                    hasil = "Sisa uang: $sisa\n$kategori"
+                    hasil = "Sisa uang:$sisa\n$kategori"
                 },
                 modifier = Modifier.weight(1f)
             ) {
@@ -198,6 +214,28 @@ fun ScreenContent(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(top = 16.dp),
             textAlign = TextAlign.Center
         )
+
+        val pemasukanInt = pemasukan.toIntOrNull() ?: 0
+        val pengeluaranInt = pengeluaran.toIntOrNull() ?: 0
+        val tabunganInt = jumlahTabungan.toIntOrNull() ?: 0
+
+        val sisa = hitungHasil(pemasukanInt, pengeluaranInt, tabunganInt, punyaTabungan)
+        val kategori = if (pemasukanInt != 0) {
+            getKategori(sisa, pemasukanInt, context)
+        } else {
+            "Tidak ada Pemasukan"
+        }
+        val message = stringResource(R.string.bagikan_template, pemasukanInt, pengeluaranInt, if (punyaTabungan) tabunganInt else 0, sisa, kategori.uppercase())
+
+        if (hasil.isNotEmpty()) {
+            Button(
+                onClick = { shareData(context, message) },
+                modifier = Modifier.padding(top = 8.dp),
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                Text(text = stringResource(R.string.bagikan))
+            }
+        }
     }
 }
 
@@ -217,6 +255,16 @@ private fun getKategori(sisa: Int, pemasukan: Int, context: Context): String {
         persentase >= 50 -> context.getString(R.string.status_cukup)
         persentase > 0 -> context.getString(R.string.status_boros)
         else -> context.getString(R.string.status_sangat_boros)
+    }
+}
+
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
     }
 }
 @Composable
@@ -240,6 +288,6 @@ fun ErrorHint (isError: Boolean) {
 @Composable
 fun MainScreenPreview() {
     MoneyCheckTheme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoneyCheck</string>
+    <string name="MC_intro">"Let's check your financial condition this month! "</string>
+    <string name="pemasukan">Income</string>
+    <string name="pengeluaran">Expense</string>
+    <string name="tabungan">"Have Savings "</string>
+    <string name="jumlah_tabungan">"Savings Amount "</string>
+    <string name="hitung">"Calculate "</string>
+    <string name="hasil_sisa">"Remaining: Rp%d "</string>
+    <string name="hasil_tabungan">"Savings: Rp%d "</string>
+    <string name="status_aman">"Your finances are very stable! You manage your expenses and savings very well. "</string>
+    <string name="status_cukup">"Your finances are quite stable, but you can still save more! "</string>
+    <string name="status_boros">"Your spending is quite high, you should start controlling it! "</string>
+    <string name="status_sangat_boros">"Your expenses exceed your income! Warning, your financial condition is not healthy. "</string>
+    <string name="input_invalid">"Cannot be empty. "</string>
+    <string name="tabungan_kosong">"No income available "</string>
+    <string name="reset">Reset</string>
+    <string name="about_screen">About App</string>
+    <string name="deskripsi">MoneyCheck is a simple mobile application designed to help users evaluate their monthly financial condition. Users can input their income, expenses, and savings (if any), and the app will automatically calculate the remaining balance and determine the financial category. This application is designed with a simple and user-friendly interface for everyday use.  Financial categories are determined based on the percentage of remaining money compared to income. If ≥ 70%, it is considered very stable; 50%–69% is fairly stable; 0%–49% is considered wasteful; and if the remaining money ≤ 0, it is considered very wasteful.</string>
+    <string name="kembali">Back</string>
+    <string name="bagikan">Share</string>
+    <string name="bagikan_template">"Income: IDR %1$s "</string>
+</resources>

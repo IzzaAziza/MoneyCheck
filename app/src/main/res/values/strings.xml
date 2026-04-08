@@ -19,4 +19,11 @@
     <string name="input_invalid">Tidak boleh kosong.</string>
     <string name="tabungan_kosong">Tidak ada pemasukan</string>
     <string name="reset">Reset</string>
+
+    <string name="about_screen">Tentang Aplikasi</string>
+    <string name="deskripsi">Aplikasi MoneyCheck adalah aplikasi mobile sederhana untuk membantu pengguna mengevaluasi kondisi keuangan bulanan. Pengguna dapat memasukkan pemasukan, pengeluaran, serta tabungan (jika ada), kemudian aplikasi akan menghitung sisa uang dan menentukan kategori kondisi keuangan secara otomatis. Aplikasi ini dirancang dengan tampilan yang sederhana dan mudah digunakan untuk kebutuhan sehari-hari.
+        \nKategori keuangan ditentukan berdasarkan persentase sisa uang terhadap pemasukan. Jika ≥ 70% termasuk sangat stabil, 50%–69% cukup stabil, 0%–49% boros, dan jika sisa uang ≤ 0 maka sangat boros.</string>
+    <string name="kembali">Kembali</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template">Pemasukan: Rp %1$s \nPengeluaran: Rp %2$s \nTabungan: Rp %3$s \nSisa Uang: Rp %4$s \nKategori: %5$s</string>
 </resources>
