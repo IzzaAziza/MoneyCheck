@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.baiqizzaaziza0105.moneycheck.navigation.SetupNavGraph
-import com.baiqizzaaziza0105.moneycheck.ui.screen.MainScreen
 import com.baiqizzaaziza0105.moneycheck.ui.theme.MoneyCheckTheme
 
 class MainActivity : ComponentActivity() {
