@@ -119,7 +119,10 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         )
         OutlinedTextField(
             value = pemasukan,
-            onValueChange = { pemasukan = it},
+            onValueChange = {
+                pemasukan = it
+                pemasukanError = false
+            },
             label = { Text(text = stringResource(R.string.pemasukan)) },
             leadingIcon = { IconPicker(pemasukanError, "Rp")},
             supportingText = { ErrorHint(pemasukanError) },
@@ -132,7 +135,10 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         )
         OutlinedTextField(
             value = pengeluaran,
-            onValueChange = {pengeluaran = it},
+            onValueChange = {
+                pengeluaran = it
+                pengeluaranError = false
+            },
             label = {Text(text = stringResource(id = R.string.pengeluaran)) },
             leadingIcon = { IconPicker(pengeluaranError, "Rp") },
             supportingText = {ErrorHint(pengeluaranError)},
@@ -173,12 +179,16 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         ) {
             Button(
                 onClick = {
+                    pemasukanError = pemasukan.isBlank()
+                    pengeluaranError = pengeluaran.isBlank()
+
+                    if (pemasukanError || pengeluaranError) return@Button
+
                     val pemasukanInt = pemasukan.toIntOrNull() ?: 0
                     val pengeluaranInt = pengeluaran.toIntOrNull() ?: 0
                     val tabunganInt = jumlahTabungan.toIntOrNull() ?: 0
 
-                    val sisa = hitungHasil(pemasukanInt, pengeluaranInt, tabunganInt, punyaTabungan
-                    )
+                    val sisa = hitungHasil(pemasukanInt, pengeluaranInt, tabunganInt, punyaTabungan)
 
                     val kategori = if (pemasukanInt != 0) {
                         getKategori(sisa, pemasukanInt, context)
